@@ -4,17 +4,14 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/auth", function (req, res) {
-  /* This server is only available to nginx */
   const streamkey = req.body.key;
 
-  /* You can make a database of users instead :) */
-  if (streamkey === "supersecret") {
+  if (streamkey === process.env.STREAMKEY) {
     res.status(200).send();
     return;
   }
 
-  /* Reject the stream */
-  res.status(403).send();
+  res.status(403).send('Check your emails for a key!');
 });
 
 app.listen(8000, function () {
