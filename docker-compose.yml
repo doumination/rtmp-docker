@@ -12,3 +12,4 @@ services:
   auth:
     build: ./auth
     container_name: auth_server
+  env_file: .env
